@@ -1,0 +1,87 @@
+
+{% extends "layout.html" %}
+{% block content %}
+
+    <main>
+    <!--１段目-->
+    <!--投稿内容-->
+    <div class="py-5">
+        <div class="container">
+            <div class="d-flex flex-column">
+                <div class="row">
+                    <h1>Tasks</h1>
+                </div>
+                <div class="row flex-nowrap flex-grow-1 overflow-auto rounded-3">
+                    {% for task in tasks %}
+                        <div class="col-md-4 gy-1">
+                            <div class="card">
+                                <div class="card-header">
+                                    {{ task.header }}
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ task.task_name }}</h5>
+                                    <p class="card-text">{{ task.days_range }}</p>
+                                    
+                                    <a href="#" class="card-link" data-toggle="modal" data-target="#detailModal" data-task-id="{{ task.task_id }}" data-task-detail="{{ task.details | join(', ') }}">Detail</a>
+                                    <a href="#" class="card-link" data-toggle="modal" data-target="#changeDeadlineModal">Change</a>
+                                    <a href="#" class="btn btn-light complete-task" role="button" data-task-id="{{ task.task_id }}">Complete</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--２段目-->
+    <!--テキスト-->
+    <hr class="border  border-bottom-black border-2 opacity-50">
+    <div class="py-3 ">
+        <div  class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1> Schedule&Tasks</h1>
+                </div>
+            </div>
+            <!---->
+            <div class="row flex-grow-1 py-3">
+                <div class="col-md-5 gx-5 bg-light rounded-3 border border-dark shadow-lg align-items-center">
+                <!--中身-->
+                
+                    <table class="table table-responsive align-middle table-hover border gy-3">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Projects</th>
+                            <th scope="col">Deadline</th>
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for project in projects[-3:] %}
+                            <tr>
+                                <th scope="row">{{ loop.index }}</th>
+                                <td>{{ project[1] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class = "col-1">
+                    
+                </div>
+                <div class="col-md-6  bg-light border border-dark shadow-lg rounded-3">
+                <!--中身-->
+                <!--Full　Callendar-->
+                    <div id='calendar'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+
+
+{% endblock %} 
